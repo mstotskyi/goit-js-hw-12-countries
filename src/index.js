@@ -1,7 +1,7 @@
  import countryCardTpl from './templates/template.hbs';
-import './sass/main.scss';
-
-import debounce from 'lodash.debounce'
+ import './sass/main.scss';
+ import debounce from 'lodash.debounce';
+ import GetCountryList from './fetchCountries';
 
 const refs = {
 form: document.querySelector('#form'),
@@ -9,22 +9,23 @@ input: document.querySelector('#search'),
 container: document.querySelector('.root'),
 };
 
-let searchQuery = '';
-
+const getCountryList = new GetCountryList ();
 
 const handlerInput = (e) => {
     e.preventDefault();
     refs.container.innerHTML = '';
-    searchQuery = refs.input.value;
-    if (searchQuery === ''){
+     getCountryList.query = refs.input.value.trim();
+    if (getCountryList.query === ''){
         return
-    } else {fetch (`https://restcountries.eu/rest/v2/name/${searchQuery}`)
-    .then(response => response.json())
-    .then(countries => renderListEl(countries))
-    .catch(err=> alert (`Введите корректный запрос`))
-}}
+    } else {
+       fetchCountries();
+  }}
     
-refs.form.addEventListener("input", debounce(handlerInput, 500));
+refs.form.addEventListener("input", debounce(handlerInput, 700));
+
+function fetchCountries(){
+    getCountryList.fetchCountries().then(arr => {renderListEl(arr)})
+}
 
 function renderListEl (arr){
     let listElement = '';
@@ -33,24 +34,22 @@ function renderListEl (arr){
         return
     }
 
-    if (arr.length <= 1) {
+    if (arr.length === 1) {
         arr.forEach(country => {
-            console.log(country);
         const countryCard = createCountryCard(country);
         refs.container.insertAdjacentHTML(`beforeend`, countryCard)
-
-        function createCountryCard(country){
-            return countryCardTpl(country);
-        }
-                } )
-                return
-
-    } else {arr.forEach(country => {
+        
+        } )
+            return
+    } 
+    
+    if (arr.length > 2 && arr.length <= 10) {arr.forEach(country => {
         listElement = `<li>${country.name}</li>`
         refs.container.insertAdjacentHTML(`beforeend`, listElement)
-                } )
-               }
-                
+         })
+        }
     }
-    
-   
+                
+    function createCountryCard(country){
+       return countryCardTpl(country);
+     }
