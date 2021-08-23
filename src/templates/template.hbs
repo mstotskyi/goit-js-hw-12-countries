@@ -1,12 +1,18 @@
 
-<article>
-    <h1 class="">{{name}}</h1>
-    <img src='{{flag}}' alt='{{name}}'/>
-    <p class="">Capital: {{capital}}</p>
-    <p class="">Population: {{population}}</p>
-    <ul class="">Laguages:
-        {{#each languages}}
-        <li class="">{{this.name}}</li>
-        {{/each}}
-    </ul>
-</article>
+<div class="country-card">
+    <h1 class="country-name">{{name}}</h1>
+    <div class="country-info">
+        <img class="country-flag" src='{{flag}}' width = 500 alt='{{name}}'/>
+        <div class="country-description">
+            <p >Capital: <span class = "description-info">{{capital}}</span></p>
+            <p >Population: <span class = "description-info">{{ population}}</span> </p>
+            <ul >Languages:
+            {{#each languages}}
+                <li class="country-language">{{this.name}}</li>
+            {{/each}}
+            </ul>
+        </div>
+        
+    </div>
+    
+</div>

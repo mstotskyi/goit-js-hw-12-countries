@@ -1,0 +1,66 @@
+body {
+    background-color: lightgray;
+}
+
+
+
+.container {
+    margin: auto;
+    max-width: 1024px;
+    text-align: center;
+    padding: 30px;
+    }
+
+
+.form {
+    max-width: 1024px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    }
+
+.input {
+    width: 50%;
+    font-size: 25px;
+    height: 50px;
+    }
+.root {
+    text-align: left;
+}
+
+.country-name {
+    font-size: 70px;
+    margin-bottom: 30px;
+    margin-top: 0;
+    text-align:center;
+    }
+
+.country-info {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    }
+
+.country-description {
+    text-align: left;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    }
+
+.country-language,
+.description-info {
+    font-size: 40px;
+    font-weight: normal;
+    }
+
+.countries-listItem{
+    font-size: 30px;
+
+    }
+   
+
+
+

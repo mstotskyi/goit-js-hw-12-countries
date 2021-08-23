@@ -30,7 +30,7 @@ function fetchCountries(){
 function renderListEl (arr){
     let listElement = '';
     if (arr.length > 10) {
-        alert (`Слишкоммного совпадений. Уточните свой запрос`)
+        alert (`Слишком много совпадений. Уточните свой запрос`)
         return
     }
 
@@ -44,7 +44,7 @@ function renderListEl (arr){
     } 
     
     if (arr.length > 2 && arr.length <= 10) {arr.forEach(country => {
-        listElement = `<li>${country.name}</li>`
+        listElement = `<li class="countries-listItem">${country.name}</li>`
         refs.container.insertAdjacentHTML(`beforeend`, listElement)
          })
         }
