@@ -1,8 +1,7 @@
+ import countryCardTpl from './templates/template.hbs';
 import './sass/main.scss';
 
 import debounce from 'lodash.debounce'
-
-
 
 const refs = {
 form: document.querySelector('#form'),
@@ -36,21 +35,18 @@ function renderListEl (arr){
 
     if (arr.length <= 1) {
         arr.forEach(country => {
-        listElement = `<article>
-                        <h1>${country.name}</h1>
-                        <img src='${country.flag}' alt='{obj.name}'/>
-                        <p>Capital: ${country.capital}</p>
-                        <p>Population: ${country.population}</p>
-                        <ul>
-                        <li></li>
-                        </ul>
-                        </article>`
-        refs.container.insertAdjacentHTML(`beforeend`, listElement)
+            console.log(country);
+        const countryCard = createCountryCard(country);
+        refs.container.insertAdjacentHTML(`beforeend`, countryCard)
+
+        function createCountryCard(country){
+            return countryCardTpl(country);
+        }
                 } )
                 return
 
     } else {arr.forEach(country => {
-        listElement = `<li><a class ='link' href="">${country.name}</a></li>`
+        listElement = `<li>${country.name}</li>`
         refs.container.insertAdjacentHTML(`beforeend`, listElement)
                 } )
                }
