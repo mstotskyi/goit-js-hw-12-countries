@@ -1,4 +1,5 @@
- import countryCardTpl from './templates/template.hbs';
+ import countryCardTpl from './templates/countryTpl.hbs';
+ import countriesListTpl from './templates/countriesListTpl.hbs';
  import './sass/main.scss';
  import '@pnotify/core/dist/BrightTheme.css';
  import "@pnotify/core/dist/PNotify.css";
@@ -18,11 +19,13 @@ const getCountryList = new GetCountryList ();
 
 const handlerInput = (e) => {
     e.preventDefault();
-    getCountryList.query = refs.input.value.trim();
-    refs.container.innerHTML = '';
-    fetchCountries();
-}
-//   }}
+        getCountryList.query = refs.input.value.trim();
+    if (getCountryList.query === ''){
+        return
+    } else {
+        refs.container.innerHTML = '';
+       fetchCountries();
+  }}
     
 refs.form.addEventListener("input", debounce(handlerInput, 700));
 
@@ -31,7 +34,7 @@ function fetchCountries(){
 }
 
 function renderListEl (arr){
-    let listElement = '';
+    
     if (arr.length > 10) {
         error({
             title: 'Слишком  много совпадений.',
@@ -41,23 +44,27 @@ function renderListEl (arr){
     }
 
     if (arr.length === 1) {
+        let countryCard
         arr.forEach(country => {
-        const countryCard = createCountryCard(country);
-        refs.container.insertAdjacentHTML(`beforeend`, countryCard)
-        
+        countryCard = createCountryCard(country);
         } )
-            return
+        refs.container.insertAdjacentHTML(`beforeend`, countryCard)
+        return
     } 
     
-    if (arr.length > 2 && arr.length <= 10) {arr.forEach(country => {
-        listElement = `<li class="countries-listItem">${country.name}</li>`
-        refs.container.insertAdjacentHTML(`beforeend`, listElement)
-         })
+
+    if (arr.length > 2 && arr.length <= 10) {
+        const countriesList = createCountiesList(arr)
+        refs.container.insertAdjacentHTML(`beforeend`, countriesList)
         }
     }
                 
     function createCountryCard(country){
-       return countryCardTpl(country);
+       return countryCardTpl(country)
      }
+
+    function createCountiesList(arr){
+        return countriesListTpl (arr)
+    }
 
      
