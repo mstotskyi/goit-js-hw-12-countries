@@ -1,7 +1,12 @@
  import countryCardTpl from './templates/template.hbs';
  import './sass/main.scss';
+ import '@pnotify/core/dist/BrightTheme.css';
+ import "@pnotify/core/dist/PNotify.css";
  import debounce from 'lodash.debounce';
  import GetCountryList from './fetchCountries';
+
+ import { error } from "@pnotify/core";
+
 
 const refs = {
 form: document.querySelector('#form'),
@@ -13,13 +18,11 @@ const getCountryList = new GetCountryList ();
 
 const handlerInput = (e) => {
     e.preventDefault();
+    getCountryList.query = refs.input.value.trim();
     refs.container.innerHTML = '';
-     getCountryList.query = refs.input.value.trim();
-    if (getCountryList.query === ''){
-        return
-    } else {
-       fetchCountries();
-  }}
+    fetchCountries();
+}
+//   }}
     
 refs.form.addEventListener("input", debounce(handlerInput, 700));
 
@@ -30,7 +33,10 @@ function fetchCountries(){
 function renderListEl (arr){
     let listElement = '';
     if (arr.length > 10) {
-        alert (`Слишком много совпадений. Уточните свой запрос`)
+        error({
+            title: 'Слишком  много совпадений.',
+            text: 'Уточните запрос.'
+          });
         return
     }
 
@@ -53,3 +59,5 @@ function renderListEl (arr){
     function createCountryCard(country){
        return countryCardTpl(country);
      }
+
+     
