@@ -5,7 +5,6 @@
  import "@pnotify/core/dist/PNotify.css";
  import debounce from 'lodash.debounce';
  import GetCountryList from './fetchCountries';
-
  import { error } from "@pnotify/core";
 
 
@@ -34,7 +33,6 @@ function fetchCountries(){
 }
 
 function renderListEl (arr){
-    
     if (arr.length > 10) {
         error({
             title: 'Слишком  много совпадений.',
@@ -44,10 +42,7 @@ function renderListEl (arr){
     }
 
     if (arr.length === 1) {
-        let countryCard
-        arr.forEach(country => {
-        countryCard = createCountryCard(country);
-        } )
+        const countryCard = createCountryCard(arr)
         refs.container.insertAdjacentHTML(`beforeend`, countryCard)
         return
     } 
@@ -59,8 +54,8 @@ function renderListEl (arr){
         }
     }
                 
-    function createCountryCard(country){
-       return countryCardTpl(country)
+    function createCountryCard(arr){
+       return countryCardTpl(arr)
      }
 
     function createCountiesList(arr){

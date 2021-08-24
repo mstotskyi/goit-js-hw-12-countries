@@ -1,7 +1,7 @@
-
+{{#each this}}
 <div class="country-card">
     <h1 class="country-name">{{name}}</h1>
-    <div class="country-info">
+        <div class="country-info">
         <img class="country-flag" src='{{flag}}' width = 500 alt='{{name}}'/>
         <div class="country-description">
             <p >Capital: <span class = "description-info">{{capital}}</span></p>
@@ -14,3 +14,4 @@
         </div>
     </div>
 </div>
+{{/each}}
