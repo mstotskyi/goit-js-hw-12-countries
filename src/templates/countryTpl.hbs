@@ -6,11 +6,14 @@
         <div class="country-description">
             <p >Capital: <span class = "description-info">{{capital}}</span></p>
             <p >Population: <span class = "description-info">{{ population}}</span> </p>
-            <ul >Languages:
+            <p>Languages:
+                <ul >
             {{#each languages}}
-                <li class="country-language">{{this.name}}</li>
+                    <li class="country-language">{{this.name}}</li>
             {{/each}}
-            </ul>
+                </ul> 
+            </p>
+            
         </div>
     </div>
 </div>
